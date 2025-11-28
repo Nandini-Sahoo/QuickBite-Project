@@ -27,13 +27,13 @@
     Get Started
   </button>
   <footer class="text-danger small mt-5">
-    © 2025 QuickBite
+    &copy | 2025 | QuickBite | All Rights Reserved
 </footer>
 
 <script>
     setTimeout(() => {
       window.location.href = "register.php";
-    }, 500000);
+    }, 5000);
     document.getElementById("getStarted").addEventListener("click", function() {
       window.location.href = "register.php";
     });

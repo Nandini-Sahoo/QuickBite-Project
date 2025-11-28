@@ -39,7 +39,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
 
 <style>
     body {
-        background: url("../images/bg2.webp") no-repeat center center fixed;
+        background: url("../images/form_background2.jpg") no-repeat center center fixed;
         background-size: cover;
         background-position: center center;
         background-repeat:no-repeat;

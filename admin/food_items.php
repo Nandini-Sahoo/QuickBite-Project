@@ -20,7 +20,7 @@ $res=$stmt->get_result();
         <th>Avalability</th>
         <th>Image</th>
         <th>Rating</th>
-        <th colspan="2">Operations</th>
+        <th>Actions</th>
     </tr>
     <?php
         $i=1;
@@ -40,16 +40,13 @@ $res=$stmt->get_result();
                     echo "No image available";
                 else {
                 ?>
-                    <img src="../upload_img/<?php echo $data['item_img'] ?>" class="img-fluid">
+                    <img src="../upload_img/<?php echo $data['item_img'] ?>" class="img-fluid" height="100" width="100">
             <?php } ?>
         </td>
         <td><?php echo $data['item_rating']; ?></td>
         <td>
-        <td>
-        <a class="btn" style="background-color: #fcbf49;" href="update.php?id=<?php echo $data['item_id'];
-        ?>">Update</a>
-        </td>
-        <td>
+        <a class="btn" style="background-color: #fcbf49; " href="update.php?id=<?php echo $data['item_id'];
+        ?>">Update</a><hr>
         <a class="btn" style="background-color: #ff758f;" href="item_delete.php?id=<?php echo $data['item_id'];
         ?>">Delete</a>
         </td>
