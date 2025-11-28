@@ -6,15 +6,21 @@ $stmt=$con->prepare($qry);
 $stmt->execute();
 $res=$stmt->get_result();
 ?>
-<h1 class="text-center text-decoration-underline my-3" style="color: #0077b6;">ORDERS</h1>
-<table class="table table-primary table-striped mx-auto w-50 shadow p-3 mb-5 bg-body-tertiary rounded">
-    <tr>
+<div class="container my-5">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="fw-bold text-dark">Orders</h2>
+    </div>
+    <table class="table table-hover align-middle shadow-lg border-0">
+        <thead class="table-dark">
+        <tr>
         <th>#</th>
         <th>Order No.</th>
         <th>Customer No.</th>
         <th>Price</th>
         <th>Status</th>
-    </tr>
+        </tr>
+        </thead>
     <?php
         $i=1;
         while($data=$res->fetch_assoc()){
@@ -34,3 +40,4 @@ $res=$stmt->get_result();
     $con->close();
      ?>
 </table>
+</div>

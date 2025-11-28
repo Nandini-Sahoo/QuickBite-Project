@@ -1,12 +1,9 @@
 <?php
-require_once 'dbcon.php';
-$qry="SELECT * FROM admin";
-$stmt=$con->prepare($qry);
-// $stmt->bind_param("i",$id);
-$stmt->execute();
-$res=$stmt->get_result();
-if($res->num_rows > 0){
-$data=$res->fetch_assoc();
+session_start();
+if (!isset($_SESSION['admin_logged_in'])) {
+    header("Location: admin_login.php");
+    exit();
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -31,13 +28,13 @@ $data=$res->fetch_assoc();
     <div class="text-start border border-2 border-opacity-75 shadow p-5 mx-auto rounded"
          style="background: rgba(228, 224, 224, 0.2); backdrop-filter: blur(2px);">
 
-        <img src="../images/<?php echo $data['admin_img'] ?>" alt="profile"
+        <img src="../images/<?php echo $_SESSION['admin_img'] ?>" alt="profile"
              width="200" height="200" class="img-fluid rounded mb-3">
 
-        <h3>Name: <?php echo $data['admin_name'] ?></h3>
-        <h4>Email: <?php echo $data['admin_email'] ?></h4>
-        <h4>Phone No.: <?php echo $data['admin_ph_no'] ?></h4>
-        <h4>Date Joined: <?php echo $data['admin_doj'] ?></h4>
+        <h3>Name: <?php echo $_SESSION['admin_name'] ?></h3>
+        <h4>Email: <?php echo $_SESSION['admin_email'] ?></h4>
+        <h4>Phone No.: <?php echo $_SESSION['admin_ph_no'] ?></h4>
+        <h4>Date Joined: <?php echo $_SESSION['admin_doj'] ?></h4>
 
         <a href="admin_dashboard.php" class="btn me-2" style="background-color: #52b788;">← Go Back</a>
         <a href="admin_logout.php" class="btn" style="background-color: #ff758f;">Log Out</a>
@@ -46,6 +43,3 @@ $data=$res->fetch_assoc();
     <script src="../asset/bootstrap.bundle.min.js"></script>
 </body>
 </html>
-<?php }
-$con->close();
- ?>

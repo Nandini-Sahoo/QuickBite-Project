@@ -1,5 +1,5 @@
-<?php include_once 'navbar.php'; ?>
 <?php
+include_once 'navbar.php';
 require_once 'dbcon.php';
 
 if($_SERVER['REQUEST_METHOD'] == "POST"){
@@ -13,10 +13,11 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
     $confirm_password=$_POST['confirm_password'];
 
     $image = $_FILES['image']['name'];
-    $tmp_name = $_FILES['image']['tmp_name'];
-    $folder = "uploads/".$image;
+    $new_name =time()."-".$image;
+    $tmp_location= $_FILES['image']['tmp_name'];
+    $folder = "./uploads/$new_name";
 
-    $qry = "INSERT INTO user(user_name, user_gender, user_dob, user_ph_no, user_email, user_address, user_pwd, user_img) VALUES(?,?,?,?,?,?,?,?)";
+    $qry = "INSERT INTO user (user_name, user_gender, user_dob, user_ph_no, user_email, user_address, user_pwd, user_img) VALUES(?,?,?,?,?,?,?,?)";
     $stmt = $con->prepare($qry);
     $stmt->bind_param("ssssssss",$name,$gender,$dob,$mobile,$email,$address,$password,$image);
 
@@ -39,17 +40,17 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
 
 <style>
     body {
-        background: url("../images/form_background2.jpg") no-repeat center center fixed;
+        background: url("../images/form_bg1.jpg") no-repeat center center fixed;
         background-size: cover;
         background-position: center center;
         background-repeat:no-repeat;
         min-height:100vh;
     }
     .register-card {
-        background: rgba(255, 255, 255, 0.3);
+        background: rgba(225, 169, 169, 0.3);
         border-radius: 50px;
         padding: 25px;
-        box-shadow: 0px 0px 20px rgba(0,0,0,0.3);
+        box-shadow: 0 6px 25px rgba(0, 0, 0, 0.8);
         margin-top:6px;
         backdrop-filter: blur(2px);
     }
@@ -59,7 +60,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
     top: 75%;
     transform: translateY(-50%);
     cursor: pointer;
-    font-size: 18px;
+    font-size: 18px;
 }
 
 .eye-icon:hover {
@@ -114,7 +115,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
         <input type="submit" value="Register" class="btn btn-warning btn-outline-danger text-black w-100 rounded-pill">
     </form>
     <div class="text-center mt-3">
-        <a href="login.php" class="text-decoration-none text-black"><b>Already have an account?Login</b></a>
+        <a href="login.php" class="text-decoration-none text-black"><b>Already have an account? Login</b></a>
     </div>
 </div></div></div>
 </body></html>

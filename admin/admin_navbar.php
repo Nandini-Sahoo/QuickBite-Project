@@ -1,12 +1,11 @@
 <?php
-require_once 'dbcon.php';
-$qry="SELECT * FROM admin";
-$stmt=$con->prepare($qry);
-// $stmt->bind_param("i",$id);
-$stmt->execute();
-$res=$stmt->get_result();
-if($res->num_rows > 0){
-$data=$res->fetch_assoc();
+session_start();
+if (!isset($_SESSION['admin_logged_in'])) {
+    header("Location: admin_login.php");
+    exit();
+}
+$name=$_SESSION['admin_name'];
+$img=$_SESSION['admin_img'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -48,6 +47,7 @@ $data=$res->fetch_assoc();
         }
         .box{
           background: radial-gradient(circle at center, #a3cef1, #b8c0ff);
+          box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
         }
         h5{
           color: #540d6e !important;
@@ -58,8 +58,8 @@ $data=$res->fetch_assoc();
     <nav class="head navbar navbar-expand-lg border-bottom border-body shadow" data-bs-theme="dark">
   <div class="container-fluid">
     <a class="navbar-brand mx-4" href="admin_profile.php">
-      <img src="../images/<?php echo $data['admin_img'] ?>" alt="profile" width="60" height="60" class="d-block align-text-top rounded-circle">
-      <?php echo $data['admin_name'] ?>
+      <img src="../images/<?php echo $img ?>" alt="profile" width="60" height="60" class="d-block align-text-top rounded-circle">
+      <?php echo $name ?>
     </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -89,4 +89,3 @@ $data=$res->fetch_assoc();
     <script src="../asset/jquery-3.7.1.min.js"></script>
 </body>
 </html>
-<?php } ?>

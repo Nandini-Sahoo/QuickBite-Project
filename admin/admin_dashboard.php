@@ -1,5 +1,6 @@
 <?php
 include_once 'admin_navbar.php';
+require_once 'dbcon.php';
 $qry = "SELECT COUNT(order_id) AS total_orders FROM orders";
 $res = $con->query($qry);
 $total_order=$res->fetch_assoc()['total_orders'];

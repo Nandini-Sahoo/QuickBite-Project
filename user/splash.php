@@ -6,6 +6,7 @@
   <title>QuickBite | Splash</title>
   
   <link rel="stylesheet" href="../asset/bootstrap.min.css">
+  <link rel="stylesheet" href="../asset/bootstrap-icons.min.css">
   <style>
     body{
       background-color:beige;
@@ -23,20 +24,19 @@
 
   <img src="../images/logo.jpg" alt="logo" class="rounded-circle shadow mb-4 img-fluid" style="width:220px; height:220px; object-fit:cover;">
 
-  <button class="btn btn-warning text-white px-4 py-2 rounded-pill fw-semibold" id="getStarted">
-    Get Started
+<div class="btn-group">
+  <button type="button" class="btn btn-warning dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+    Your Role
   </button>
+  <ul class="bg-warning dropdown-menu">
+    <li><a class="dropdown-item" href="register.php"><i class="bi bi-person-circle"></i> User</a></li>
+    <li><a class="dropdown-item" href="../admin/admin_login.php"><i class="bi bi-person-fill-gear"></i> Admin</a></li>
+  </ul>
+</div>
+
   <footer class="text-danger small mt-5">
     &copy | 2025 | QuickBite | All Rights Reserved
 </footer>
-
-<script>
-    setTimeout(() => {
-      window.location.href = "register.php";
-    }, 5000);
-    document.getElementById("getStarted").addEventListener("click", function() {
-      window.location.href = "register.php";
-    });
-  </script>
+<script src="../asset/bootstrap.bundle.min.js"></script>
 </body>
 </html>
