@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quickbite | navbar</title>
-    <link rel="stylesheet" href="../bootstrap/bootstrap.min.css">
-    <link rel="stylesheet" href="../bootstrap/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="../asset/bootstrap.min.css">
+    <link rel="stylesheet" href="../asset/bootstrap-icons.min.css">
       
 </head>
 
@@ -48,7 +48,7 @@
 
   </div>
 </nav>
-<script src="../bootstrap/bootstrap.bundle.min.js"></script>
+<script src="../asset/bootstrap.bundle.min.js"></script>
 
 </body>
 </html>

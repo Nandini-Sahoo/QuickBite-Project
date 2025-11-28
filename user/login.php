@@ -5,9 +5,9 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $email = $_POST['email'];
     $password = $_POST['password'];
 
-    require_once "dbconnect.php";
+    require_once "dbcon.php";
     $qry = "SELECT * FROM user WHERE user_email=?";
-    $stmt = $conn->prepare($qry);
+    $stmt = $con->prepare($qry);
     $stmt->bind_param("s", $email);
     $stmt->execute();
     $result = $stmt->get_result();

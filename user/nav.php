@@ -8,8 +8,8 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>QuickBite</title>
 
-    <link rel="stylesheet" href="../bootstrap/bootstrap.min.css">
-    <link rel="stylesheet" href="../bootstrap/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="../asset/bootstrap.min.css">
+    <link rel="stylesheet" href="../asset/bootstrap-icons.min.css">
 
     <style>
         nav.navbar {

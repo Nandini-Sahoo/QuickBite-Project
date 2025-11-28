@@ -1,6 +1,6 @@
 <?php
 session_start();
-include_once 'dbconnect.php'; 
+include_once 'dbcon.php'; 
 
 if(!isset($_SESSION['user_id'])){
     header("Location: login.php");
@@ -8,9 +8,9 @@ if(!isset($_SESSION['user_id'])){
 }
 $user_id = $_SESSION['user_id'];
 
-$conn= mysqli_connect("localhost","root","","quickbite");
+$con= mysqli_connect("localhost","root","","quickbite");
 $query = "SELECT name,email,phone,delivery_address,profile_image FROM user WHERE id='$user_id' ";
-$result = mysqli_query($conn, $query);
+$result = mysqli_query($con, $query);
 $user = mysqli_fetch_assoc($result);
 
 if(isset($_POST['update_pic'])){
@@ -20,7 +20,7 @@ if(isset($_POST['update_pic'])){
 
     move_uploaded_file($temp, $path);
 
-    mysqli_query($conn, "UPDATE users SET profile_image='$image' WHERE id='$user_id'");
+    mysqli_query($con, "UPDATE users SET profile_image='$image' WHERE id='$user_id'");
     echo "<script>alert('Profile Picture Updated Successfully'); window.location.href='profile.php';</script>";
 }
 
@@ -31,7 +31,7 @@ include_once 'nav.php';
 <html>
 <head>
 <title>User Profile - Quickbite</title>
-<link rel="stylesheet" href="../bootstrap/bootstrap.min.css">
+<link rel="stylesheet" href="../asset/bootstrap.min.css">
 
 <style>
 body{

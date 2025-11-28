@@ -1,6 +1,6 @@
 <?php include_once 'navbar.php'; ?>
 <?php
-require_once 'dbconnect.php';
+require_once 'dbcon.php';
 
 if($_SERVER['REQUEST_METHOD'] == "POST"){
     $name = $_POST['name'];
@@ -17,7 +17,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
     $folder = "uploads/".$image;
 
     $qry = "INSERT INTO user(user_name, user_gender, user_dob, user_ph_no, user_email, user_address, user_pwd, user_img) VALUES(?,?,?,?,?,?,?,?)";
-    $stmt = $conn->prepare($qry);
+    $stmt = $con->prepare($qry);
     $stmt->bind_param("ssssssss",$name,$gender,$dob,$mobile,$email,$address,$password,$image);
 
     if($stmt->execute()){
@@ -26,8 +26,8 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
     } else {
         echo "<script>alert('Registration Failed!');</script>";
     }
-    $smt->close();
-    $conn->close();
+    $stmt->close();
+    $con->close();
 }
 ?>
 <!DOCTYPE html>
