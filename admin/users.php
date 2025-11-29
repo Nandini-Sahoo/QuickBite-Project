@@ -13,7 +13,7 @@ $res=$stmt->get_result();
         <th>User ID</th>
         <th>Name</th>
         <th>Phone Number</th>
-        <th></th>
+        <th>Action</th>
     </tr>
     <?php
         $i=1;

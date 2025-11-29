@@ -6,10 +6,12 @@ $stmt=$con->prepare($qry);
 $stmt->execute();
 $res=$stmt->get_result();
 ?>
-<div class="container">
-    <h1 class="item-heading rounded p-1 mt-5">MANAGE ADMIN</h1>
-    <a href="add_admin.php" class="btn add-btn">Add Admin</a>
-    <h2 class="text-center text-decoration-underline my-3" style="color: #8f0aaaff;">ADMINS</h2>
+<div class="container my-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="fw-bold text-dark">Manage Admin</h2>
+        <a href="add_admin.php" class="btn add-btn shadow-sm" style="background-color: #296046ff;"><i class="bi bi-plus-circle"></i> Add Admin
+        </a>
+    </div>
     <table class="table table-primary table-striped mx-auto w-50 shadow p-3 mb-5 bg-body-tertiary rounded">
         <tr>
             <th>#</th>
