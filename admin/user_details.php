@@ -33,7 +33,7 @@ $orders = $stmt2->get_result();
     <div class="card shadow-lg mb-4 border-0">
         <div class="row g-0">
             <div class="col-md-3 text-center p-3">
-                <img src="uploads/<?php echo $user['user_img']; ?>" 
+                <img src="../user/uploads/<?php echo $user['user_img']; ?>" 
                      class="img-fluid rounded-circle border" 
                      style="width:150px; height:150px; object-fit:cover;">
             </div>

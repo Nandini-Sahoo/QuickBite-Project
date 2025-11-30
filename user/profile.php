@@ -1,6 +1,6 @@
 <?php
-session_start();
-include_once 'dbcon.php'; 
+include_once 'navbar.php';
+require_once 'dbcon.php'; 
 
 if(!isset($_SESSION['user_id'])){
     header("Location: login.php");
@@ -8,23 +8,31 @@ if(!isset($_SESSION['user_id'])){
 }
 $user_id = $_SESSION['user_id'];
 
-$con= mysqli_connect("localhost","root","","quickbite");
-$query = "SELECT name,email,phone,delivery_address,profile_image FROM user WHERE id='$user_id' ";
-$result = mysqli_query($con, $query);
-$user = mysqli_fetch_assoc($result);
+$qry = "SELECT * FROM users WHERE user_id=?";
+$stmt = $con->prepare($qry);
+$stmt->bind_param("i", $user_id);
+$stmt->execute();
+$res = $stmt->get_result();
+$user=$res->fetch_assoc();
 
-if(isset($_POST['update_pic'])){
+if (isset($_POST['update_pic'])) {
+
+    // Upload details
     $image = $_FILES['profile_image']['name'];
-    $temp = $_FILES['profile_image']['tmp_name'];
-    $path = "../images/".$image;
+    $new = time()."-".$_FILES['profile_image']['tmp_name'];
+    $tmp_location= $_FILES['profile_image']['tmp_name'];
+    $path = "./uploads/$new";
 
-    move_uploaded_file($temp, $path);
+    // Move file
+    move_uploaded_file($temp_name, $path);
 
-    mysqli_query($con, "UPDATE users SET profile_image='$image' WHERE id='$user_id'");
+    // Update DB (fixed column name: user_img)
+    $update = $con->prepare("UPDATE users SET user_img = ? WHERE user_id = ?");
+    $update->bind_param("si", $image, $user_id);
+    $update->execute();
+
     echo "<script>alert('Profile Picture Updated Successfully'); window.location.href='profile.php';</script>";
 }
-
-include_once 'nav.php';
 ?>
 
 <!DOCTYPE html>
@@ -65,12 +73,12 @@ body{
 <body>
 
 <div class="profile-card text-center">
-    <img src="../images/<?php echo $user['profile_image']; ?>" class="profile-img mb-3">
+    <img src="./uploads/<?php echo $user['user_img']; ?>" class="profile-img mb-3" alt="profile">
 
-    <h3><?php echo $user['name']; ?></h3>
-    <p><b>Email:</b> <?php echo $user['email']; ?></p>
-    <p><b>Phone:</b> <?php echo $user['phone']; ?></p>
-    <p><b>Address:</b> <?php echo $user['delivery_address']; ?></p>
+    <h3><?php echo $user['user_name']; ?></h3>
+    <p><b>Email:</b> <?php echo $user['user_email']; ?></p>
+    <p><b>Phone:</b> <?php echo $user['user_ph_no']; ?></p>
+    <p><b>Address:</b> <?php echo $user['user_address']; ?></p>
 
     <hr>
 

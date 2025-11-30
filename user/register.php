@@ -13,29 +13,25 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
     $confirm_password=$_POST['confirm_password'];
 
     $image = $_FILES['image']['name'];
-    $new_name =time()."-".$image;
-    $tmp_location= $_FILES['image']['tmp_name'];
+    $new_name = time()."-".$image;
+    $tmp_location = $_FILES['image']['tmp_name'];
     $folder = "./uploads/$new_name";
 
-    $qry = "INSERT INTO user (user_name, user_gender, user_dob, user_ph_no, user_email, user_address, user_pwd, user_img) VALUES(?,?,?,?,?,?,?,?)";
+    $qry = "INSERT INTO users (user_name, user_gender, user_dob, user_ph_no, user_email, user_address, user_pwd, user_img) 
+            VALUES (?,?,?,?,?,?,?,?)";
     $stmt = $con->prepare($qry);
-    $stmt->bind_param("ssssssss",$name,$gender,$dob,$mobile,$email,$address,$password,$image);
+    $stmt->bind_param("ssssssss", $name, $gender, $dob, $mobile, $email, $address, $password, $new_name);
 
-    if($stmt->execute()){
-        move_uploaded_file($tmp_name, $folder);
+    if ($stmt->execute()) {
+
+        move_uploaded_file($tmp_location, $folder);
+
         echo "<script>alert('Registration Successful!'); window.location='login.php';</script>";
     } else {
         echo "<script>alert('Registration Failed!');</script>";
     }
-    $stmt->close();
-    $con->close();
 }
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>QuickBite - Register</title>
 
 <style>
@@ -117,8 +113,11 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
     <div class="text-center mt-3">
         <a href="login.php" class="text-decoration-none text-black"><b>Already have an account? Login</b></a>
     </div>
-</div></div></div>
-</body></html>
+    <a href="../user/splash.php" class="btn btn-warning mt-3 rounded-pill fw-bold" type="submit">Back</a>
+</div>
+</div>
+</div>
+
 
 <script>
 function validateForm(){

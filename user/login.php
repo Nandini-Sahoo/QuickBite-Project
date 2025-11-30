@@ -6,21 +6,22 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $password = $_POST['password'];
 
     require_once "dbcon.php";
-    $qry = "SELECT * FROM user WHERE user_email=?";
+    $qry = "SELECT * FROM users WHERE user_email=? AND user_pwd=?";
     $stmt = $con->prepare($qry);
-    $stmt->bind_param("s", $email);
+    $stmt->bind_param("ss", $email, $password);
     $stmt->execute();
     $result = $stmt->get_result();
 
     if ($result->num_rows == 1) {
         $data = $result->fetch_assoc();
         session_start();
-        $_SESSION['name'] = $data['name'];
-        $_SESSION['email'] = $data['email'];
-        header("location:dashboard.php");
+        $_SESSION['user_id'] = $data['user_id'];
+        $_SESSION['user_name'] = $data['user_name'];
+        $_SESSION['user_email'] = $data['user_email'];
+        header("location:home.php");
         exit();
     } else {
-        $msg = "Invalid Email or Password";
+        $msg = "Invalid Email or Password!";
     }
 }
 ?><style>
@@ -82,6 +83,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                     <a href="register.php" class="fw-semibold text-decoration-none text-danger">Register</a>
                 </p>
             </div>
+            <a href="../user/splash.php" class="btn btn-warning mt-3 rounded-pill fw-bold" type="submit">Back</a>
         </div>
     </div>
 </div>

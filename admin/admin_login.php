@@ -108,7 +108,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
                  </div>
           <input type="submit" value="Login" class="btn btn-warning w-100 fw-bold rounded-pill ">
         </form>
-        <a href="../user/splash.php" class="btn btn-warning mt-3" type="submit">Back</a>
+        <a href="../user/splash.php" class="btn btn-warning mt-3 rounded-pill fw-bold" type="submit">Back</a>
         </div>
     </div>
 </div>

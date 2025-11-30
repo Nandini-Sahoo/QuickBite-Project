@@ -1,121 +1,104 @@
 <?php
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
-include_once "navbar.php"; // your navbar
+include_once 'navbar.php';
+require_once 'dbcon.php';
+
+$user_id = $_SESSION['user_id'];
+
+// Fetch cart items
+$sql = "SELECT c.cart_id, c.quantity, f.item_name, f.item_prc, f.item_img
+        FROM cart c 
+        JOIN food_items f ON c.item_id = f.item_id
+        WHERE c.user_id = $user_id";
+
+$res = mysqli_query($con, $sql);
+$item_count = mysqli_num_rows($res);
 ?>
+
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Your Cart | QuickBite</title>
-    <link rel="stylesheet" href="../asset/bootstrap.min.css">
-
-    <style>
-        body { background:#f8f9fa; font-family:Arial; }
-        .cart-img { width:70px; height:60px; border-radius:8px; object-fit:cover; }
-        .qty-btn { width:30px; height:30px; padding:0; }
-    </style>
+    <title>Your Cart</title>
 </head>
-<body>
 
+<body class="bg-light">
 <div class="container mt-4">
+    
     <h3>Your Cart</h3>
-    <div id="cartBox" class="mt-3"></div>
 
-    <div class="d-flex justify-content-between mt-3">
-        <h5 id="totalBox">Total: ₹0</h5>
-        <button class="btn btn-success" onclick="placeOrder()">Place Order</button>
-    </div>
+    <?php if ($item_count == 0): ?>
 
-    <button class="btn btn-secondary mt-3" onclick="window.location='menu.php'">← Back to Menu</button>
+        <!-- EMPTY CART MESSAGE -->
+        <div class="alert alert-warning mt-4 text-center" style="font-size: 20px;">
+            Cart is Empty!
+        </div>
+
+    <?php else: ?>
+
+        <!-- CART TABLE -->
+        <table class="table table-bordered mt-3 bg-white">
+            <thead>
+                <tr>
+                    <th>Image</th>
+                    <th>Item</th>
+                    <th>Price</th>
+                    <th>Qty</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+
+            <tbody>
+            <?php 
+            $grand_total = 0;
+            while ($row = mysqli_fetch_assoc($res)):
+                $total = $row['quantity'] * $row['item_prc'];
+                $grand_total += $total;
+            ?>
+                <tr>
+                    <td width="100"><img src="../upload_img/<?= $row['item_img']; ?>" width="80"></td>
+                    <td><?= $row['item_name']; ?></td>
+                    <td>₹<?= $row['item_prc']; ?></td>
+                    <td><?= $row['quantity']; ?></td>
+                    <td>₹<?= $total; ?></td>
+                </tr>
+            <?php endwhile; ?>
+            </tbody>
+        </table>
+
+        <!-- GRAND TOTAL -->
+        <h4 class="text-end">Grand Total: ₹<?= $grand_total; ?></h4>
+
+        <!-- PLACE ORDER BUTTON -->
+        <button id="placeOrderBtn" class="btn btn-success mt-3">
+            Place Order
+        </button>
+
+        <div id="orderMsg" class="alert alert-info mt-3 d-none">
+            Order placed! Cart will be cleared in <span id="timer">10</span> seconds...
+        </div>
+
+    <?php endif; ?>
 </div>
-
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- JS SECTION -->
 <script>
-// ----------------- CART FUNCTIONS -----------------
+$("#placeOrderBtn").click(function () {
 
-function loadCart() {
-    let cart = localStorage.getItem("qb_cart");
-    return cart ? JSON.parse(cart) : [];
-}
+    $("#orderMsg").removeClass("d-none");
 
-function saveCart(cart) {
-    localStorage.setItem("qb_cart", JSON.stringify(cart));
-}
+    let sec = 10;
+    let timer = setInterval(() => {
+        sec--;
+        $("#timer").text(sec);
 
-function renderCart() {
-    let cart = loadCart();
-    let box = document.getElementById("cartBox");
+        if (sec <= 0) {
+            clearInterval(timer);
 
-    if (cart.length === 0) {
-        box.innerHTML = "<p class='text-muted'>Your cart is empty.</p>";
-        document.getElementById("totalBox").innerText = "Total: ₹0";
-        return;
-    }
-
-    let html = '<ul class="list-group">', total = 0;
-
-    cart.forEach(item => {
-        total += item.price * item.qty;
-
-        html += `
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-                <div class="d-flex align-items-center gap-3">
-                    <img src="${item.img}" class="cart-img">
-                    <div>
-                        <strong>${item.name}</strong><br>
-                        <small>₹${item.price} × ${item.qty}</small>
-                    </div>
-                </div>
-
-                <div class="d-flex align-items-center gap-2">
-                    <button class="btn btn-outline-dark qty-btn" onclick="changeQty(${item.id}, -1)">-</button>
-                    <span>${item.qty}</span>
-                    <button class="btn btn-outline-dark qty-btn" onclick="changeQty(${item.id}, 1)">+</button>
-                    <button class="btn btn-danger btn-sm" onclick="removeItem(${item.id})">X</button>
-                </div>
-            </li>
-        `;
-    });
-
-    html += "</ul>";
-    box.innerHTML = html;
-    document.getElementById("totalBox").innerText = "Total: ₹" + total;
-}
-
-function changeQty(id, change) {
-    let cart = loadCart();
-    let item = cart.find(i => i.id === id);
-
-    if (!item) return;
-
-    item.qty += change;
-    if (item.qty <= 0) cart = cart.filter(i => i.id !== id);
-
-    saveCart(cart);
-    renderCart();
-}
-
-function removeItem(id) {
-    let cart = loadCart().filter(i => i.id !== id);
-    saveCart(cart);
-    renderCart();
-}
-
-function placeOrder() {
-    let cart = loadCart();
-
-    if (cart.length === 0) {
-        alert("Cart is empty!");
-        return;
-    }
-
-    alert("Order placed successfully!");
-    localStorage.removeItem("qb_cart");
-    renderCart();
-}
-
-// load on page open
-renderCart();
+            $.post("clear_cart.php", function () {
+    location.reload();
+        });
+        }
+    }, 1000);
+});
 </script>
 
 </body>

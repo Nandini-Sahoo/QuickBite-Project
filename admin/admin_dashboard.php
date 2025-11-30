@@ -41,14 +41,14 @@ $con->close();
         </div>
         <div class="col-md-4">
             <div class="box card card-body">
-                <h5 class="card-title">TOTAL FOOD ITEM</h5><hr>
-                <p class="card-text fs-2">9</p>
+                <h5 class="card-title">TOTAL ITEM</h5><hr>
+                <p class="card-text fs-2"><?= $total_item ?></p>
             </div>
         </div>
         <div class="col-md-4">
             <div class="box card card-body">
                 <h5 class="card-title">TOTAL USER</h5><hr>
-                <p class="card-text fs-2">9</p>
+                <p class="card-text fs-2"><?= $total_user ?></p>
             </div>
         </div>
         <div class="col-md-4">
