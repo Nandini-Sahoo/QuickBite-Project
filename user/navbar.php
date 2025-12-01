@@ -32,11 +32,11 @@ session_start();
         </li>
 
         <li class="nav-item">
-          <a class="nav-link" href="about.php">About Us</a>
+          <a class="nav-link" href="#about-us">About Us</a>
         </li>
 
         <li class="nav-item">
-          <a class="nav-link" href="contact.php">Contact Us</a>
+          <a class="nav-link" href="#contact-us">Contact Us</a>
         </li>
 
         <?php if (!isset($_SESSION['user_id'])) { ?>
