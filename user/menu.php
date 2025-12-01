@@ -2,26 +2,22 @@
 include_once 'navbar.php';
 require_once 'dbcon.php';
 
-// Fetch categories
 $categories = mysqli_query($con, "SELECT DISTINCT item_cat FROM food_items");
 
-// Filtering
 $filter = "";
 if (isset($_GET['cat']) && $_GET['cat'] !== "all") {
     $cat = mysqli_real_escape_string($con, $_GET['cat']);
     $filter = "WHERE item_cat = '$cat' AND is_available = 1";
 } else {
-    $filter = "WHERE is_available = 1";  // default: show all
+    $filter = "WHERE is_available = 1";
 }
 
-// Fetch items
 $items = mysqli_query($con, "SELECT * FROM food_items $filter");
 ?>
 <div class="container mt-4">
 
     <h3 class="mb-3">Menu</h3>
 
-    <!-- CATEGORY FILTERS -->
     <div class="mb-4">
         <a href="menu.php?cat=all"
            class="btn btn-<?php echo (!isset($_GET['cat']) || $_GET['cat']=='all') ? 'primary' : 'secondary'; ?> cat-btn">
@@ -36,7 +32,6 @@ $items = mysqli_query($con, "SELECT * FROM food_items $filter");
         <?php endwhile; ?>
     </div>
 
-    <!-- FOOD ITEMS -->
     <div class="row">
     <?php while ($item = mysqli_fetch_assoc($items)): ?>
     <div class="col-md-4 mb-4">
@@ -53,8 +48,6 @@ $items = mysqli_query($con, "SELECT * FROM food_items $filter");
                     <input type="hidden" name="item_id" value="<?php echo $item['item_id']; ?>">                    
                     <button type="submit" class="btn btn-warning w-100">ADD</button>
                 </form>
-
-
             </div>
         </div>
     </div>

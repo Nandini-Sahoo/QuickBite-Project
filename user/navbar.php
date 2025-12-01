@@ -47,7 +47,7 @@ date_default_timezone_set('Asia/Kolkata');
         font-weight: 500;
       }
       .navbar-brand { color: #ff6b35; font-weight: bold; }
-      .food-card { border-radius: 12px; box-shadow: 0 6px 18px rgba(0,0,0,0.08); background: #fff; overflow:hidden; }
+      .food-card { border-radius: 12px; box-shadow: 0 6px 18px rgba(0,0,0,0.08); background: #fff; overflow:hidden; padding: 10px;}
       .food-img { width:100%; height:150px; object-fit:cover; display:block; }
       .btn-orange { background:#ff6b35; color:#fff; border:none; }
       .badge-cart { position: relative; top: -8px; left: -5px; }
@@ -69,29 +69,23 @@ date_default_timezone_set('Asia/Kolkata');
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ms-auto">
         
-        <!-- Always visible -->
         <li class="nav-item">
           <a class="nav-link border-end" href="home.php"><i class="bi bi-house-door"></i>Home</a>
         </li>
-
-        <li class="nav-item">
-          <a class="nav-link border-end" href="#about-us"><i class="bi bi-file-earmark-person"></i>About Us</a>
-        </li>
-
-        <li class="nav-item">
-          <a class="nav-link border-end" href="#contact-us"><i class="bi bi-phone"></i>Contact Us</a>
-        </li>
-
         <?php if (!isset($_SESSION['user_id'])) { ?>
-            <!-- User NOT logged in -->
             <li class="nav-item ms-2">
               <a href="login.php" class="btn btn-danger rounded-pill px-4 fw-semibold">Login</a>
             </li>
-
         <?php } else { ?>
-            <!-- User IS logged in -->
             <li class="nav-item">
               <a class="nav-link border-end" href="menu.php"><i class="bi bi-menu-down"></i>Menu</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link border-end" href="#about-us"><i class="bi bi-file-earmark-person"></i>About Us</a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link border-end" href="#contact-us"><i class="bi bi-phone"></i>Contact Us</a>
             </li>
 
             <li class="nav-item">

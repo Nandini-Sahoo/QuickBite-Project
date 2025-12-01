@@ -17,16 +17,13 @@ $user=$res->fetch_assoc();
 
 if (isset($_POST['update_pic'])) {
 
-    // Upload details
     $image = $_FILES['profile_image']['name'];
     $new = time()."-".$_FILES['profile_image']['tmp_name'];
     $tmp_location= $_FILES['profile_image']['tmp_name'];
     $path = "./uploads/$new";
 
-    // Move file
     move_uploaded_file($temp_name, $path);
 
-    // Update DB (fixed column name: user_img)
     $update = $con->prepare("UPDATE users SET user_img = ? WHERE user_id = ?");
     $update->bind_param("si", $image, $user_id);
     $update->execute();
