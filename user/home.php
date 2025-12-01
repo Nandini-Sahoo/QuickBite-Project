@@ -1,25 +1,6 @@
 <?php
 include_once 'navbar.php';
-?>
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>QuickBite — Home</title>
-
-  <link rel="stylesheet" href="../asset/bootstrap.min.css">
-  <style>
-    body { background: #f8f9fa; font-family: Arial, sans-serif; }
-    .navbar-brand { color: #ff6b35; font-weight: bold; }
-    .food-card { border-radius: 12px; box-shadow: 0 6px 18px rgba(0,0,0,0.08); background: #fff; overflow:hidden; }
-    .food-img { width:100%; height:150px; object-fit:cover; display:block; }
-    .btn-orange { background:#ff6b35; color:#fff; border:none; }
-    .badge-cart { position: relative; top: -8px; left: -5px; }
-  </style>
-</head>
-<body>
-  
+?> 
 <!--container -->
 <section class="py-4">
   <div class="container">
@@ -94,9 +75,9 @@ include_once 'navbar.php';
 </section>
 
 <!-- FOOTER -->
-<footer class="bg-white py-3 border-top mt-3">
-  <div class="container text-center text-muted small">
-    © <?php echo date("Y"); ?> QuickBite
+<footer class="bg-dark py-3 border-top mt-3">
+  <div class="container text-center text-white small">
+    &copy | 2025 | QuickBite | All Rights Reserved
   </div>
 </footer>
 

@@ -1,9 +1,9 @@
 <?php
 include_once 'admin_navbar.php';
 require_once 'dbcon.php';
-if(!isset($_GET['order_id']))
+if(!isset($_GET['id']))
 header('location: orders.php');
-$order_id=$_GET['order_id'];
+$order_id = $_GET['id'];
 $qry = "SELECT o.*, u.user_name, u.user_id, u.user_ph_no FROM orders o JOIN users u ON o.user_id = u.user_id WHERE o.order_id = ?";
 $stmt = $con->prepare($qry);
 $stmt->bind_param("i", $order_id);

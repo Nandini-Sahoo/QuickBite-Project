@@ -17,20 +17,6 @@ if (isset($_GET['cat']) && $_GET['cat'] !== "all") {
 // Fetch items
 $items = mysqli_query($con, "SELECT * FROM food_items $filter");
 ?>
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <title>Menu</title>
-    <style>
-        .menu-card { border-radius: 15px; overflow: hidden; transition: 0.2s; }
-        .menu-card:hover { transform: scale(1.03); }
-        .cat-btn { margin-right: 10px; }
-    </style>
-</head>
-
-<body class="bg-light">
-
 <div class="container mt-4">
 
     <h3 class="mb-3">Menu</h3>

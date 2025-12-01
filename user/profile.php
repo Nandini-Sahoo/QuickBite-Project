@@ -34,44 +34,6 @@ if (isset($_POST['update_pic'])) {
     echo "<script>alert('Profile Picture Updated Successfully'); window.location.href='profile.php';</script>";
 }
 ?>
-
-<!DOCTYPE html>
-<html>
-<head>
-<title>User Profile - Quickbite</title>
-<link rel="stylesheet" href="../asset/bootstrap.min.css">
-
-<style>
-body{
-    background: url('../images/bg-food-wall.jpg');
-    background-size: cover;
-    background-repeat: no-repeat;
-}
-.profile-card{
-    background: rgba(255,255,255,0.82);
-    padding: 30px;
-    border-radius: 12px;
-    max-width: 600px;
-    margin: 50px auto;
-    box-shadow: 0px 0px 20px rgba(0,0,0,0.3);
-}
-.profile-img{
-    width: 130px;
-    height: 130px;
-    border-radius: 50%;
-    border: 4px solid #c40000;
-    object-fit: cover;
-}
-.btn-update{
-    background: #c40000;
-    color: white;
-    font-weight: 500;
-}
-</style>
-</head>
-
-<body>
-
 <div class="profile-card text-center">
     <img src="./uploads/<?php echo $user['user_img']; ?>" class="profile-img mb-3" alt="profile">
 
@@ -99,6 +61,3 @@ function validatePic(){
     return true;
 }
 </script>
-
-</body>
-</html>

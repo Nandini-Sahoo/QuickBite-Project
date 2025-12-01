@@ -32,11 +32,9 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
     }
 }
 ?>
-<title>QuickBite - Register</title>
-
 <style>
     body {
-        background: url("../images/form_bg1.jpg") no-repeat center center fixed;
+        background: url("../images/background.jpg") no-repeat center center fixed;
         background-size: cover;
         background-position: center center;
         background-repeat:no-repeat;
@@ -64,12 +62,12 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
 }
 </style>
 </head>
-<body>
+<body class="text-white">
 
 <div class="container my-4">
 <div class="row">
 <div class="col-md-6 mx-auto shadow p-4 rounded register-card">
-    <h3 class="text-center text-black fs-2  fw-bold mb-3">Create Your QuickBite Account</h3>
+    <h3 class="text-center text-white fs-2  fw-bold mb-3">Create Your QuickBite Account</h3>
 
     <form action="register.php" method="post" enctype="multipart/form-data" onsubmit="return validateForm()">
 
@@ -96,13 +94,13 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
         <div class="form-group position-relative mb-3">
         <label class="form-label fs-5 fw-bold">Password</label>
         <input type="password" class="form-control mb-2 rounded-pill" name="password" id="password" required>
-            <i class="eye-icon bi bi-eye-slash" id="eyeicon"></i>        
+            <i class="eye-icon bi bi-eye-slash text-black" id="eyeicon"></i>        
         </div>
         
         <div class="form-group position-relative mb-3">
         <label class="form-label fs-5  fw-bold">Confirm Password</label>
         <input type="password" class="form-control mb-2 rounded-pill" name="confirm_password" id="confirm_password" required>
-            <i class="eye-icon bi bi-eye-slash" id="eyeicon2"></i>        
+            <i class="eye-icon bi bi-eye-slash text-black" id="eyeicon2"></i>        
         </div>
 
         <label class="form-label fs-5 fw-bold">Upload Profile Image</label>
@@ -111,7 +109,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
         <input type="submit" value="Register" class="btn btn-warning btn-outline-danger text-black w-100 rounded-pill">
     </form>
     <div class="text-center mt-3">
-        <a href="login.php" class="text-decoration-none text-black"><b>Already have an account? Login</b></a>
+        <a href="login.php" class="text-decoration-none text-white"><b>Already have an account? <u>Login</u></b></a>
     </div>
     <a href="../user/splash.php" class="btn btn-warning mt-3 rounded-pill fw-bold" type="submit">Back</a>
 </div>

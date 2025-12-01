@@ -13,10 +13,6 @@ $qry = "SELECT COUNT(user_id) AS total_users FROM users";
 $res = $con->query($qry);
 $total_user=$res->fetch_assoc()['total_users'];
 
-$qry = "SELECT COUNT(order_id) AS new_orders FROM orders WHERE order_status='New'";
-$res = $con->query($qry);
-$new_orders = $res->fetch_assoc()['new_orders'];
-
 $qry = "SELECT COUNT(order_id) AS confirmed_orders FROM orders WHERE order_status='Confirmed'";
 $res = $con->query($qry);
 $confirmed_orders = $res->fetch_assoc()['confirmed_orders'];
@@ -36,7 +32,7 @@ $con->close();
         <div class="col-md-4">
             <div class="box card card-body">
                 <h5 class="card-title">TOTAL ORDER</h5><hr>
-                <p class="card-text fs-2">9</p>
+                <p class="card-text fs-2"><?= $total_order ?></p>
             </div>
         </div>
         <div class="col-md-4">
@@ -53,26 +49,20 @@ $con->close();
         </div>
         <div class="col-md-4">
             <div class="box card card-body">
-                <h5 class="card-title">NEW ORDER</h5><hr>
-                <p class="card-text fs-2">9</p>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="box card card-body">
                 <h5 class="card-title">CONFIRMED ORDER</h5><hr>
-                <p class="card-text fs-2">9</p>
+                <p class="card-text fs-2"><?= $confirmed_orders ?></p>
             </div>
         </div>
         <div class="col-md-4">
             <div class="box card card-body">
                 <h5 class="card-title">CANCELLED ORDER</h5><hr>
-                <p class="card-text fs-2">9</p>
+                <p class="card-text fs-2"><?= $cancelled_orders ?></p>
             </div>
         </div>
         <div class="col-md-4">
             <div class="box card card-body">
                 <h5 class="card-title">TOTAL REVENUE</h5><hr>
-                <p class="card-text text-success fs-2">900 /-</p>
+                <p class="card-text text-success fs-2"><?= $total_revenue ?> /-</p>
             </div>
         </div>
     </div>

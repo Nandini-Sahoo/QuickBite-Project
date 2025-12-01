@@ -19,6 +19,7 @@ $res=$stmt->get_result();
         <th>Customer No.</th>
         <th>Price</th>
         <th>Status</th>
+        <th>Action</th>
         </tr>
         </thead>
     <?php
@@ -29,7 +30,7 @@ $res=$stmt->get_result();
         <td><?php echo $i++; ?></td>
         <td><?php echo $data['order_id']; ?></td>
         <td><?php echo $data['user_id']; ?></td>
-        <td><?php echo $data['total_amout']; ?></td>
+        <td><?php echo $data['total_amount']; ?></td>
         <td><?php echo $data['order_status']; ?></td>
         <td>
         <a class="btn" style="background-color: #adc178;" href="order_details.php?id=<?php echo $data['order_id'];

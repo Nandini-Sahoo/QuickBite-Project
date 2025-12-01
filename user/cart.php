@@ -71,7 +71,9 @@ $item_count = mysqli_num_rows($res);
         <button id="placeOrderBtn" class="btn btn-success mt-3">
             Place Order
         </button>
-
+        <button id="cancelOrderBtn" class="btn btn-danger mt-3 ms-2">
+            Cancel Order
+        </button>
         <div id="orderMsg" class="alert alert-info mt-3 d-none">
             Order placed! Cart will be cleared in <span id="timer">10</span> seconds...
         </div>
@@ -83,23 +85,54 @@ $item_count = mysqli_num_rows($res);
 <script>
 $("#placeOrderBtn").click(function () {
 
-    $("#orderMsg").removeClass("d-none");
+    // 1. Create Order FIRST
+    $.post("place_order.php", function (order_id) {
 
-    let sec = 10;
-    let timer = setInterval(() => {
-        sec--;
-        $("#timer").text(sec);
-
-        if (sec <= 0) {
-            clearInterval(timer);
-
-            $.post("clear_cart.php", function () {
-    location.reload();
-        });
+        if (order_id.trim() === "error") {
+            alert("Failed to place order!");
+            return;
         }
-    }, 1000);
-});
-</script>
 
-</body>
-</html>
+        $("#orderMsg").removeClass("d-none");
+
+        let sec = 10;
+        let timer = setInterval(() => {
+            sec--;
+            $("#timer").text(sec);
+
+            // 2. After countdown, clear cart + update order to confirmed
+            if (sec <= 0) {
+                clearInterval(timer);
+
+                $.post("clear_cart.php", { order_id: order_id }, function () {
+                    location.reload();
+                });
+            }
+        }, 1000);
+
+    });
+});
+
+$("#cancelOrderBtn").click(function () {
+
+    if (!confirm("Are you sure you want to cancel the order?")) {
+        return;
+    }
+
+    // Create order and mark as Cancelled
+    $.post("order_cancel.php", function (order_id) {
+
+        if (order_id.trim() === "error") {
+            alert("Failed to cancel order!");
+            return;
+        }
+
+        // Clear cart immediately
+        $.post("clear_cart_cancel.php", { order_id: order_id }, function () {
+            alert("Order Cancelled!");
+            location.reload();
+        });
+    });
+});
+
+</script>

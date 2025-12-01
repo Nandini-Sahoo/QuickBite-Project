@@ -51,8 +51,9 @@ $res=$stmt->get_result();
                     <td>
                         <?php if($data['is_available']) { ?>
                             <span class="badge bg-success">Yes</span>
-                        <?php } else ?>
+                        <?php } else {?>
                             <span class="badge bg-danger">No</span>
+                            <?php } ?>
                     </td>
 
                     <td>

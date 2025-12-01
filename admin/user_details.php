@@ -55,7 +55,7 @@ $orders = $stmt2->get_result();
 
     <?php
     if($orders->num_rows == 0){
-        echo "<h4 class='text-center text-secondary'>No orders placed yet.</h4>";
+        echo "<h4 class='text-center text-light'>No orders placed yet.</h4>";
     }
 
     while($order = $orders->fetch_assoc()) {
@@ -91,7 +91,7 @@ $orders = $stmt2->get_result();
                 <?php while($row = $items->fetch_assoc()){ ?>
                 <tr>
                     <td><?php echo $row['item_name']; ?></td>
-                    <td><img src="uploads/<?php echo $row['item_img']; ?>" 
+                    <td><img src="../upload_img/<?php echo $row['item_img']; ?>" 
                              style="width:60px; height:60px; object-fit:cover;"
                              class="rounded"></td>
                     <td><?php echo $row['quantity']; ?></td>
