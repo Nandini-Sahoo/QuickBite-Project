@@ -7,9 +7,7 @@ $stmt=$con->prepare($qry);
 $stmt->execute();
 $res=$stmt->get_result();
 ?>
-
 <div class="container my-5">
-
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h2 class="fw-bold text-dark">Manage Food Menu</h2>
         <a href="add_item.php" class="btn shadow-sm" style="background-color: #52b788;"><i class="bi bi-plus-circle"></i> Add Item

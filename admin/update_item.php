@@ -10,9 +10,9 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     $available = $_POST['available'];
     $rating = $_POST['rating'];
     if($available === 'Yes')
-        $avail = 1
+        $avail = 1;
     else if($available === 'No')
-        $avail = 0
+        $avail = 0;
     $qry = "UPDATE food_items SET item_name=?, item_desc=?, item_prc=?, item_cat=?, is_available=?, item_rating=? WHERE $item_id=?";
     $stmt=$con->prepare($qry);
     if(!$stmt)

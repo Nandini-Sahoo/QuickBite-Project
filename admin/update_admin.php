@@ -8,9 +8,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     $phone = $_POST['phone'];
     $doj = $_POST['doj'];
 
-    $qry = "UPDATE admin 
-            SET admin_name=?, admin_email=?, admin_ph_no=?, admin_doj=? 
-            WHERE admin_id=?";
+    $qry = "UPDATE admin SET admin_name=?, admin_email=?, admin_ph_no=?, admin_doj=?  WHERE admin_id=?";
     $stmt = $con->prepare($qry);
 
     if(!$stmt){
