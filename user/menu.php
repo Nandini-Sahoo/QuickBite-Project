@@ -36,10 +36,13 @@ $items = mysqli_query($con, "SELECT * FROM food_items $filter");
     <?php while ($item = mysqli_fetch_assoc($items)): ?>
     <div class="col-md-4 mb-4">
         <div class="card shadow-sm menu-card h-100">
-          <img src="../upload_img/<?= $item['item_img']; ?>" class="card-img-top">
+          <img src="../upload_img/<?= $item['item_img']; ?>" class="card-img-top" height="300">
           <div class="card-body d-flex flex-column">
                 <h5><?= $item['item_name']; ?></h5>
-                <p class="text-muted"><?= $item['item_cat']; ?></p>
+                <div class="d-flex justify-content-between align-items-center mb-1">
+                    <p class="text-muted mb-0"><?= $item['item_cat']; ?></p>
+                    <span class="badge bg-warning-subtle text-dark"><?= $item['item_rating']; ?> ⭐</span>
+                </div>
                 <p class="desc-text flex-grow-1">
                     <?= $item['item_desc']; ?>
                 </p>
